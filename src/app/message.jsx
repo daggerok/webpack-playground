@@ -1,5 +1,5 @@
 import React from 'react';
 
 export let Message = () => (
-  <div><strong class="blue">react</strong> app</div>
+  <div><span class="grey">this is</span> <strong class="red">a react</strong> <span class="blue">app.</span></div>
 );

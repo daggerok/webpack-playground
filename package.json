@@ -19,6 +19,8 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.23.1",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
     "lite-server": "^2.2.0",
     "node-sass": "^3.8.0",
     "npm-run-all": "^2.2.2",
