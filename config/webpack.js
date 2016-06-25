@@ -3,23 +3,26 @@
  */
 module.exports = {
   entry: {
-    app: './src/app.babel.js'
+    app: './src/app.jsx'
   },
   output: {
     path: './dist',
     filename: '[name].js'
   },
   resolve: {
-    extensions: ['', '.babel.js', '.es6']
+    extensions: ['', '.babel.js', '.es6', '.jsx', '.js']
   },
   module: {
     loaders: [
       {
-        test: /\.(babel.js|es6)$/,
+        test: /\.(jsx|babel.js|es6)$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         query: {
-          presets: ['babel-preset-es2015']
+          presets: [
+            'babel-preset-es2015',
+            'babel-preset-react'
+          ]
         }
       }
     ]
