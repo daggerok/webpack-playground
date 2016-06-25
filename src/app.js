@@ -3,4 +3,7 @@
  */
 const $ = require('jquery');
 
-$('#app').hide().html('basic jquery app').fadeIn(1000);
+$('#app')
+  .hide()
+  .html('java script app')
+  .fadeIn(1000);

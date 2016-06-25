@@ -6,11 +6,11 @@
   "main": "index.js",
   "license": "ISC",
   "scripts": {
+    "build": "npm run webpack -- -p",
     "start": "npm i && npm-run-all -p webpack-watch lite-server",
     "lite-server": "lite-server -c config/lite-server.json",
-    "webpack-watch": "npm run webpack -- -w",
-    "build": "npm run webpack -- -p",
-    "webpack": "webpack ./src/app.js ./dist/app.js"
+    "webpack": "webpack --config config/webpack.js",
+    "webpack-watch": "npm run webpack -- -w"
   },
   "devDependencies": {
     "lite-server": "^2.2.0",
