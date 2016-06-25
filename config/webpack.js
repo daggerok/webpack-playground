@@ -1,9 +1,15 @@
 /**
  * Created by mak on 6/25/16.
  */
+const webpack = require('webpack');
+
 module.exports = {
   entry: {
-    app: './src/app.jsx'
+    app: './src/app.jsx',
+    vendor: [
+      'react', 
+      'react-dom'
+    ]
   },
   output: {
     path: './dist',
@@ -37,5 +43,11 @@ module.exports = {
         loader: 'url-loader?limit=20000'
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin(
+      /* chunkName= */"vendor",
+      /* filename= */ "vendor.js"
+    )
+  ]
 };
