@@ -24,6 +24,10 @@ module.exports = {
             'babel-preset-react'
           ]
         }
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
       }
     ]
   }
