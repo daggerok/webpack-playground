@@ -7,10 +7,12 @@
   "license": "ISC",
   "scripts": {
     "build": "webpack --config config/webpack-prod.js -p",
-    "start": "npm i && npm-run-all -p webpack-watch lite-server",
-    "lite-server": "lite-server -c config/lite-server.json",
+    "start": "npm i && npm-run-all webpack watch",
+    "webpack-dev-server": "webpack-dev-server --config config/webpack.js",
+    "webpack-watch": "npm run webpack -- -w",
     "webpack": "webpack --config config/webpack.js",
-    "webpack-watch": "npm run webpack -- -w"
+    "watch": "npm-run-all -p webpack-watch webpack-dev-server livereload",
+    "livereload": "livereload"
   },
   "devDependencies": {
     "babel-core": "^6.10.4",
@@ -22,13 +24,14 @@
     "file-loader": "^0.9.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
-    "lite-server": "^2.2.0",
+    "livereload": "^0.4.1",
     "node-sass": "^3.8.0",
     "npm-run-all": "^2.2.2",
     "sass-loader": "^3.2.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
     "react": "^15.1.0",

@@ -2,6 +2,7 @@
  * Created by mak on 6/25/16.
  */
 const webpack = require('webpack');
+const devServer = require('./devServer');
 
 module.exports = {
   entry: {
@@ -49,5 +50,6 @@ module.exports = {
       /* chunkName= */"vendor",
       /* filename= */ "vendor.js"
     )
-  ]
+  ],
+  devServer: devServer
 };
