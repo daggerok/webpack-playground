@@ -7,7 +7,8 @@ module.exports = {
   },
   output: {
     path: './dist',
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: "./dist/"
   },
   resolve: {
     extensions: ['', '.babel.js', '.es6', '.jsx', '.js']
@@ -30,7 +31,11 @@ module.exports = {
       },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       { test: /\.scss$/, loader: 'style-loader!css-loader!sass-loader' },
-      { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' }
+      { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
+      {
+        test: /\.(png|jpg|jpeg)$/,
+        loader: 'url-loader?limit=20000'
+      }
     ]
   }
 };

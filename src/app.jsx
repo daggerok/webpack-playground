@@ -6,8 +6,8 @@ import { render } from 'react-dom';
 
 import { Message } from './app/Message';
 
-import './assets/app.css';
-import './assets/app.scss';
-import './assets/app.less';
+import './assets/styles/app.css';
+import './assets/styles/app.scss';
+import './assets/styles/app.less';
 
 render(<Message/>, document.getElementById('app'));
