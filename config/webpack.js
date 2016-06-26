@@ -35,6 +35,11 @@ module.exports = {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'jshint-loader'
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'source-map-loader'
       }
     ],
     loaders: [
@@ -69,7 +74,13 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|jpeg)$/,
-        loader: 'url-loader?limit=20000'
+        exclude: /(node_modules|bower_components)/,
+        loader: 'url-loader?limit=8192'
+      },
+      {
+        test: /\.(ttf|eot|woff|woff2|svg)$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'url-loader?limit=8192'
       }
     ]
   },
