@@ -8,7 +8,7 @@ module.exports = {
   entry: {
     app: './src/app.jsx',
     vendor: [
-      'react', 
+      'react',
       'react-dom'
     ]
   },
@@ -21,6 +21,19 @@ module.exports = {
     extensions: ['', '.babel.js', '.es6', '.jsx', '.js']
   },
   module: {
+    preLoaders: [
+      {
+        test: /\.(jsx|es6|babel.js)$/,
+        exclude: /node_modules/,
+        include: './src',
+        loader: "eslint-loader"
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'jshint-loader'
+      }
+    ],
     loaders: [
       {
         test: /\.(jsx|babel.js|es6)$/,
