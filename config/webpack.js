@@ -3,6 +3,7 @@
  */
 const webpack = require('webpack');
 const devServer = require('./devServer');
+const ExtractPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: '#cheap-module-inline-source-map',
@@ -26,7 +27,7 @@ module.exports = {
     preLoaders: [
       {
         test: /\.(jsx|es6|babel.js)$/,
-        exclude: /node_modules/,
+        exclude: /(node_modules|bower_components)/,
         include: './src',
         loader: "eslint-loader"
       },
@@ -51,9 +52,21 @@ module.exports = {
           ]
         }
       },
-      { test: /\.css$/, loader: 'style-loader!css-loader' },
-      { test: /\.scss$/, loader: 'style-loader!css-loader!sass-loader' },
-      { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
+      {
+        test: /\.css$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: ExtractPlugin.extract('style-loader','css-loader')
+      },
+      {
+        test: /\.scss$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: ExtractPlugin.extract('style-loader','css-loader!sass-loader')
+      },
+      {
+        test: /\.less$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: ExtractPlugin.extract('style-loader','css-loader!less-loader')
+      },
       {
         test: /\.(png|jpg|jpeg)$/,
         loader: 'url-loader?limit=20000'
@@ -61,6 +74,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new ExtractPlugin('app.css'),
     new webpack.optimize.CommonsChunkPlugin(
       /* chunkName= */"vendor",
       /* filename= */ "vendor.js"
