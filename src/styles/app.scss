@@ -1,0 +1,11 @@
+/* styles in src/style directory are applied to the whole page */
+$color: cornflowerblue;
+$hoverColor: lightsteelblue;
+
+a {
+  :hover {
+    color: $hoverColor;
+  }
+
+  color: $color
+}

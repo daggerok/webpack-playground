@@ -8,19 +8,21 @@
   "scripts": {
     "build": "webpack --config config/webpack-prod.js -p",
     "start": "npm i && npm-run-all webpack watch",
-    "webpack-dev-server": "webpack-dev-server --config config/webpack.js",
+    "start-old": "npm i && npm-run-all webpack watch-old",
+    "webpack-dev-server": "webpack-dev-server --config config/webpack.js --history-api-fallback --inline --progress",
     "webpack-watch": "npm run webpack -- -w",
     "webpack": "webpack --config config/webpack.js",
-    "watch": "npm-run-all -p webpack-watch webpack-dev-server livereload",
-    "livereload": "livereload"
+    "watch": "npm-run-all -p webpack-watch livereload json-server",
+    "watch-old": "npm-run-all -p webpack-watch webpack-dev-server livereload json-server",
+    "livereload": "livereload",
+    "json-server": "json-server ./api/rest.json -r ./api/routes.json -p 3000 --static ./ -w"
   },
   "devDependencies": {
-    "autoprefixer-loader": "^3.2.0",
+    "autoprefixer": "^6.3.6",
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
-    "babel-plugin-react-html-attrs": "^2.0.0",
     "babel-preset-es2015": "^6.9.0",
-    "babel-preset-react": "^6.5.0",
+    "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.23.1",
     "eslint": "^2.13.1",
     "eslint-loader": "^1.3.0",
@@ -28,20 +30,29 @@
     "file-loader": "^0.9.0",
     "jshint": "^2.9.2",
     "jshint-loader": "^0.8.3",
+    "json-server": "^0.8.14",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "livereload": "^0.4.1",
     "node-sass": "^3.8.0",
     "npm-run-all": "^2.2.2",
+    "postcss-loader": "^0.9.1",
+    "precss": "^1.4.0",
+    "raw-loader": "^0.5.1",
     "sass-loader": "^3.2.1",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack": "^1.13.1"
   },
   "dependencies": {
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "angular": "^1.5.7",
+    "angular-animate": "^1.5.7",
+    "angular-sanitize": "^1.5.7",
+    "angular-ui-router": "^0.3.1",
+    "bootstrap": "^3.3.6",
+    "jquery": "^3.0.0",
+    "ng-toast": "^2.0.0",
+    "satellizer": "^0.14.1"
   }
 }

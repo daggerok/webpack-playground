@@ -1,0 +1,23 @@
+{
+  "people": [
+    {
+      "name": "Max",
+      "friends": [
+        "Bob",
+        "Will",
+        "Alex",
+        "daggerok"
+      ],
+      "id": 1
+    },
+    {
+      "name": "daggerok",
+      "friends": [
+        "Alex",
+        "Jake",
+        "Max"
+      ],
+      "id": 2
+    }
+  ]
+}
