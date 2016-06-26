@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const devServer = require('./devServer');
 
 module.exports = {
+  devtool: '#cheap-module-inline-source-map',
   entry: {
     app: './src/app.jsx',
     vendor: [
@@ -15,7 +16,8 @@ module.exports = {
   output: {
     path: './dist',
     filename: '[name].js',
-    publicPath: "./dist/"
+    publicPath: "./dist/",
+    sourceMapFilename: 'maps/[file].map'
   },
   resolve: {
     extensions: ['', '.babel.js', '.es6', '.jsx', '.js']
