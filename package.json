@@ -15,6 +15,7 @@
     "livereload": "livereload"
   },
   "devDependencies": {
+    "autoprefixer-loader": "^3.2.0",
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-react-html-attrs": "^2.0.0",

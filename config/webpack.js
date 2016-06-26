@@ -55,17 +55,17 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /(node_modules|bower_components)/,
-        loader: ExtractPlugin.extract('style-loader','css-loader')
+        loader: ExtractPlugin.extract('style-loader','css-loader!autoprefixer-loader')
       },
       {
         test: /\.scss$/,
         exclude: /(node_modules|bower_components)/,
-        loader: ExtractPlugin.extract('style-loader','css-loader!sass-loader')
+        loader: ExtractPlugin.extract('style-loader','css-loader!autoprefixer-loader!sass-loader')
       },
       {
         test: /\.less$/,
         exclude: /(node_modules|bower_components)/,
-        loader: ExtractPlugin.extract('style-loader','css-loader!less-loader')
+        loader: ExtractPlugin.extract('style-loader','css-loader!autoprefixer-loader!less-loader')
       },
       {
         test: /\.(png|jpg|jpeg)$/,
