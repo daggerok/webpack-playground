@@ -8,17 +8,25 @@ const autoprefixer = require('autoprefixer');
 const precss = require('precss');
 
 module.exports = {
+  modulesDirectories: [
+    'node_modules'
+  ],
   devtool: '#cheap-module-inline-source-map',
   entry: {
-    app: './src/app.js'
-    // ,vendors: [
-    //   'angular',
-    //   'angular-ui-router',
-    //   'angular-animate',
-    //   'angular-sanitize',
-    //   'satellizer',
-    //   'ng-toast'
-    // ]
+    app: [
+      'babel-polyfill',
+      './src/app.js'
+    ]
+    /*
+    ,vendors: [
+      'angular',
+      'angular-ui-router',
+      'angular-animate',
+      'angular-sanitize',
+      'satellizer',
+      'ng-toast'
+    ]
+    */
   },
   output: {
     path: './dist',
@@ -27,7 +35,11 @@ module.exports = {
     sourceMapFilename: 'maps/[file].map'
   },
   resolve: {
-    extensions: ['', '.es6', '.js']
+    extensions: [
+      '',
+      '.es6',
+      '.js'
+    ]
   },
   module: {
     preLoaders: [
@@ -67,14 +79,19 @@ module.exports = {
         loader: 'raw-loader'
       },
       {
+        test: /\.css$/,
+        // exclude: /node_modules/, // comment exclusion out if you are importing bootstrap...
+        loader: ExtractPlugin.extract('style-loader', 'css-loader?importloader=1', 'postcss-loader')
+      },
+      {
         test: /\.scss$/,
         exclude: /node_modules/,
-        loader: ExtractPlugin.extract('style-loader','css-loader!postcss-loader!sass-loader')
+        loader: ExtractPlugin.extract('style-loader', 'css-loader!postcss-loader!sass-loader')
       },
       {
         test: /\.less$/,
         exclude: /node_modules/,
-        loader: ExtractPlugin.extract('style-loader','css-loader!postcss-loader!less-loader')
+        loader: ExtractPlugin.extract('style-loader', 'css-loader!postcss-loader!less-loader')
       },
       {
         test: /\.(png|jpg|jpeg|gif)$/,
@@ -87,47 +104,51 @@ module.exports = {
       },
       {
         test: /\.(woff|woff2)$/,
-        loader:'url?prefix=font/&limit=8192'
+        loader:'url-loader?prefix=font/&limit=8192'
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=8192&mimetype=application/octet-stream'
+        loader: 'url-loader?limit=8192&mimetype=application/octet-stream'
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=8192&mimetype=image/svg+xml'
-      },
-      // {
-      //   test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-      //   exclude: /node_modules/,
-      //   loader: 'url-loader?limit=8192'
-      // },
-      {
-        test: /\.css$/,
-        // exclude: /node_modules/,
-        loader: ExtractPlugin.extract('style-loader','css-loader?importloader=1', 'postcss-loader')
+        loader: 'url-loader?limit=8192&mimetype=image/svg+xml'
       }
     ]
   },
   postcss: function () {
-    return [precss, autoprefixer];
+    return [
+      precss,
+      autoprefixer
+    ];
   },
   plugins: [
     new ExtractPlugin('app.css'),
     new CopyPlugin([
       /*
       // angular
-      {from: './node_modules/angular/angular.min.js',                             to: './vendors/angular'},
-      {from: './node_modules/angular-ui-router/release/angular-ui-router.min.js', to: './vendors/angular'},
+      {from: './node_modules/angular/angular.min.js',
+         to: './vendors/angular'},
+      {from: './node_modules/angular-ui-router/release/angular-ui-router.min.js',
+         to: './vendors/angular'},
+
       // toast
-      {from: './node_modules/angular-animate/angular-animate.min.js',             to: './vendors/angular/toast'},
-      {from: './node_modules/angular-sanitize/angular-sanitize.min.js',           to: './vendors/angular/toast'},
-      {from: './node_modules/ng-toast/dist/ngToast.min.js',                       to: './vendors/angular/toast'},
-      {from: './node_modules/ng-toast/dist/ngToast.min.css',                      to: './vendors/angular/toast'},
-      {from: './node_modules/ng-toast/dist/ngToast-animations.min.css',           to: './vendors/angular/toast'},
+      {from: './node_modules/angular-animate/angular-animate.min.js',
+              to: './vendors/angular/toast'},
+      {from: './node_modules/angular-sanitize/angular-sanitize.min.js',
+              to: './vendors/angular/toast'},
+      {from: './node_modules/ng-toast/dist/ngToast.min.js',
+              to: './vendors/angular/toast'},
+      {from: './node_modules/ng-toast/dist/ngToast.min.css',
+              to: './vendors/angular/toast'},
+      {from: './node_modules/ng-toast/dist/ngToast-animations.min.css',
+              to: './vendors/angular/toast'},
+
       // bootstrap
-      {from: './node_modules/bootstrap/dist/css/bootstrap.min.css',               to: './bootstrap'},
-      {from: './node_modules/bootstrap/dist/fonts',                               to: './bootstrap/fonts'},
+      {from: './node_modules/bootstrap/dist/css/bootstrap.min.css',
+              to: './vendors/bootstrap'},
+      {from: './node_modules/bootstrap/dist/fonts',
+              to: './vendors/bootstrap/fonts'},
       */
       // app
       {from: './src/images', to: './'}
