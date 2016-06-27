@@ -9,7 +9,16 @@ module.exports = {
     watchOptions: 100
   },
   proxy: {
-    '/api': 'http://localhost:8080'
+    "/api/*": {
+      "target": {
+        "host": "localhost",
+        "protocol": "http:",
+        "port": 8080
+      },
+      ignorePath: true,
+      changeOrigin: true,
+      secure: false
+    }
   },
   stats: 'minimal'
 };

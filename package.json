@@ -6,16 +6,21 @@
   "main": "index.js",
   "license": "ISC",
   "scripts": {
-    "build": "webpack --config config/webpack-prod.js -p",
-    "start": "npm i && npm-run-all webpack watch",
-    "start-old": "npm i && npm-run-all webpack watch-old",
-    "webpack-dev-server": "webpack-dev-server --config config/webpack.js --history-api-fallback --inline --progress",
-    "webpack-watch": "npm run webpack -- -w",
+    "build": "npm i && webpack --config config/webpack-prod.js -p",
     "webpack": "webpack --config config/webpack.js",
-    "watch": "npm-run-all -p webpack-watch livereload json-server",
-    "watch-old": "npm-run-all -p webpack-watch webpack-dev-server livereload json-server",
-    "livereload": "livereload",
-    "json-server": "json-server ./api/rest.json -r ./api/routes.json -p 3000 --static ./ -w"
+    "start": "npm i && npm-run-all webpack watch",
+    "watch": "npm-run-all -p json-server webpack-watch livereload",
+    "json-server": "json-server ./api/rest.json -r ./api/routes.json  --static ./ -p 3000",
+    "webpack-watch": "npm run webpack -- -w",
+    "livereload": "livereload"
+  },
+  "livereload": {
+    "exclusions": [
+      "./.git*",
+      "./node_modules/**/*.*",
+      "./api/**/*.*",
+      "*.md"
+    ]
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
@@ -48,11 +53,25 @@
   "dependencies": {
     "angular": "^1.5.7",
     "angular-animate": "^1.5.7",
+    "angular-es6": "^3.1.1",
     "angular-sanitize": "^1.5.7",
     "angular-ui-router": "^0.3.1",
     "bootstrap": "^3.3.6",
     "jquery": "^3.0.0",
     "ng-toast": "^2.0.0",
     "satellizer": "^0.14.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daggerok/webpack-playground.git"
+  },
+  "keywords": [
+    "webpack",
+    "angular",
+    "es6"
+  ],
+  "bugs": {
+    "url": "https://github.com/daggerok/webpack-playground/issues"
+  },
+  "homepage": "https://github.com/daggerok/webpack-playground#readme"
 }

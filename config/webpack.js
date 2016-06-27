@@ -2,29 +2,28 @@
  * Created by mak on 6/25/16.
  */
 const webpack = require('webpack');
-const devServer = require('./devServer');
 const ExtractPlugin = require('extract-text-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const precss = require('precss');
 const autoprefixer = require('autoprefixer');
+const precss = require('precss');
 
 module.exports = {
   devtool: '#cheap-module-inline-source-map',
   entry: {
-    app: './src/index.js',
-    vendors: [
-      'angular',
-      'angular-ui-router',
-      'angular-animate',
-      'angular-sanitize',
-      'satellizer',
-      'ng-toast'
-    ]
+    app: './src/app.js'
+    // ,vendors: [
+    //   'angular',
+    //   'angular-ui-router',
+    //   'angular-animate',
+    //   'angular-sanitize',
+    //   'satellizer',
+    //   'ng-toast'
+    // ]
   },
   output: {
     path: './dist',
     filename: '[name].js',
-    publicPath: "./dist/",
+    publicPath: "./",
     sourceMapFilename: 'maps/[file].map'
   },
   resolve: {
@@ -98,11 +97,11 @@ module.exports = {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url?limit=8192&mimetype=image/svg+xml'
       },
-      {
-        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        exclude: /node_modules/,
-        loader: 'url-loader?limit=8192'
-      },
+      // {
+      //   test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+      //   exclude: /node_modules/,
+      //   loader: 'url-loader?limit=8192'
+      // },
       {
         test: /\.css$/,
         // exclude: /node_modules/,
@@ -127,11 +126,11 @@ module.exports = {
       {from: './node_modules/ng-toast/dist/ngToast.min.css',                      to: './vendors/angular/toast'},
       {from: './node_modules/ng-toast/dist/ngToast-animations.min.css',           to: './vendors/angular/toast'},
       // bootstrap
-      {from: './node_modules/bootstrap/dist/css/bootstrap.min.css',               to: './vendors/bootstrap'},
-      {from: './node_modules/bootstrap/dist/fonts',                               to: './vendors/bootstrap/fonts'},
+      {from: './node_modules/bootstrap/dist/css/bootstrap.min.css',               to: './bootstrap'},
+      {from: './node_modules/bootstrap/dist/fonts',                               to: './bootstrap/fonts'},
       */
       // app
-      {from: './src/public/images',                                               to: './images'}
+      {from: './src/images', to: './'}
     ])
   ],
   /*
@@ -144,7 +143,6 @@ module.exports = {
     'ng-toast': 'ng-toast'
   },
   */
-  devServer: devServer,
   node:{
     console: true,
     fs: 'empty',

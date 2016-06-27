@@ -1,11 +1,10 @@
 /* styles in src/style directory are applied to the whole page */
-$color: cornflowerblue;
-$hoverColor: lightsteelblue;
+$display: inline;
 
-a {
-  :hover {
-    color: $hoverColor;
+ul {
+  li {
+    span.glyphicon.glyphicon-pencil {
+      display: $display;
+    }
   }
-
-  color: $color
 }
