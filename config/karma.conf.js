@@ -1,6 +1,15 @@
 // Karma configuration
 // Generated on Sun Dec 18 2016 21:57:45 GMT+0200 (EET)
 
+const wpConfigBuilder = require('./webpack.config.test.js');
+const env = { test: true };
+const wpConfig = wpConfigBuilder(env);
+
+const specGlob = 'src/**/*.spec.js';
+const testGlob = 'src/**/*.test.js';
+
+console.log('running karma');
+
 module.exports = function(config) {
   config.set({
 
@@ -18,8 +27,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/**/*.spec.js',
-      'src/**/*.test.js'
+      testGlob,
+      specGlob,
     ],
 
 
@@ -31,7 +40,13 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      [testGlob]: ['webpack'],
+      [specGlob]: ['webpack'],
     },
+
+
+    // webpack configuration:
+    webpack: wpConfig,
 
 
     // test results reporter to use
