@@ -2,7 +2,8 @@ import {
   optimize,
   DefinePlugin,
   ProvidePlugin,
-  NoErrorsPlugin, } from 'webpack';
+  NoErrorsPlugin,
+  LoaderOptionsPlugin, } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextWebpackPlugin from 'extract-text-webpack-plugin';
 import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin';
@@ -36,6 +37,35 @@ const htmlWebpackPlugin = env => {
   return new HtmlWebpackPlugin(HtmlWebpackPluginConfig);
 };
 
+/*
+  Warniing! do not use `-p` webpack build option with it!
+  if you want compage -p with this solution:
+  - comment out `...productionPlugins(env),` line
+  - run build with command: `npm run build -- -p`
+
+  read more here:
+  https://webpack.js.org/guides/production-build/#components/sidebar/sidebar.jsx
+*/
+const productionPlugins = env => env !== 'prod' ? [] : [
+  // production death code (using in libs like react...);
+  new DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify('production'),
+    },
+  }),
+  // minification:
+  new optimize.UglifyJsPlugin({
+    compress:{
+      warnings: false,
+    },
+  }),
+  // apply any optimizations for loaders they can do to speed up build time with no debugging
+  new LoaderOptionsPlugin({
+    minimize: true,
+    debug: false,
+  }),
+];
+
 export default env => [
   new NoErrorsPlugin(),
   extractTextWebpackPlugin,
@@ -52,10 +82,5 @@ export default env => [
   }),
   htmlWebpackPlugin(env),
   new ScriptExtHtmlWebpackPlugin({ defaultAttribute: 'defer', }),
-  // // not necessary:
-  // new DefinePlugin({
-  //   'process.env': {
-  //     'NODE_ENV': JSON.stringify(env),
-  //   },
-  // }),
+  ...productionPlugins(env),
 ];

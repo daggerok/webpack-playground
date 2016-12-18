@@ -9,7 +9,7 @@
     "clean": "rimraf -rf ./dist",
     "prewebpack": "npm run clean",
     "serve": "npm-run-all build browser-sync",
-    "build": "npm run webpack -- --env prod -p",
+    "build": "npm run webpack -- --env prod",
     "browser-sync": "browser-sync start -s dist",
     "webpack": "webpack --config ./config/webpack.config.babel.js --bail --progress",
     "webpack-dev-server": "webpack-dev-server --config ./config/webpack.config.babel.js --bail  --progress",
