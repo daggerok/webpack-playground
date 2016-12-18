@@ -1,5 +1,5 @@
 describe('calculator', () => {
   it('just should work', () => {
-    // todo
+    expect(true).to.be.true;
   });
 });
