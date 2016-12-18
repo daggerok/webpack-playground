@@ -1,8 +1,9 @@
 // Karma configuration
 // Generated on Sun Dec 18 2016 21:57:45 GMT+0200 (EET)
 
-const wpConfigBuilder = require('./webpack.config.test.js');
-const env = { test: true };
+import wpConfigBuilder from './webpack.config.babel';
+// const env = { test: true };
+const env = 'test'; // let's be more consistent...
 const wpConfig = wpConfigBuilder(env);
 
 const specGlob = 'src/**/*.spec.js';
@@ -10,7 +11,8 @@ const testGlob = 'src/**/*.test.js';
 
 console.log('running karma');
 
-module.exports = function(config) {
+// using module.exports is required by karma:
+module.exports = (config) => {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)

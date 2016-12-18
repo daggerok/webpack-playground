@@ -9,14 +9,6 @@ import ExtractTextWebpackPlugin from 'extract-text-webpack-plugin';
 import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin';
 import { publicPath } from './output.babel.js';
 
-export const extractTextWebpackPlugin = new ExtractTextWebpackPlugin({
-  // filename: '[name]-[hash].bundle.css?ver=[chunkhash]',
-  filename: '[name].bundle.css?ver=[chunkhash]',
-  allChunks: true,
-  disable: false,
-  publicPath,
-});
-
 const HtmlWebpackPluginConfig = {
   // // spa fallback (prod, ie github pages only): ¯\_(ツ)_/¯,
   // filename: 'index.html',
@@ -30,8 +22,12 @@ const HtmlWebpackPluginConfig = {
   },
 };
 
+/* helpers */
+const is = (env, test) => env === test || (env && env[test]);
+const not = (env, test) => !is(env, test);
+
 const htmlWebpackPlugin = env => {
-  if (env !== 'prod') {
+  if (not(env, 'prod')) {
     HtmlWebpackPluginConfig.minify = false;
   }
   return new HtmlWebpackPlugin(HtmlWebpackPluginConfig);
@@ -46,7 +42,7 @@ const htmlWebpackPlugin = env => {
   read more here:
   https://webpack.js.org/guides/production-build/#components/sidebar/sidebar.jsx
 */
-const productionPlugins = env => env !== 'prod' ? [] : [
+const productionPlugins = env => not(env, 'prod') ? [] : [
   // production death code (using in libs like react...);
   new DefinePlugin({
     'process.env': {
@@ -66,10 +62,18 @@ const productionPlugins = env => env !== 'prod' ? [] : [
   }),
 ];
 
+export const extractTextWebpackPlugin = new ExtractTextWebpackPlugin({
+  // filename: '[name]-[hash].bundle.css?ver=[chunkhash]',
+  filename: '[name].bundle.css?ver=[chunkhash]',
+  allChunks: true,
+  disable: false,
+  publicPath,
+});
+
 export default env => [
   new NoErrorsPlugin(),
   extractTextWebpackPlugin,
-  new optimize.CommonsChunkPlugin({
+  is(env, 'test') ? undefined : new optimize.CommonsChunkPlugin({ // will not used for test
     name: 'vendors',
     minChunks: Infinity,
     // filename: 'vendors-[hash].bundle.js?ver=[chunkhash]',
@@ -83,4 +87,4 @@ export default env => [
   htmlWebpackPlugin(env),
   new ScriptExtHtmlWebpackPlugin({ defaultAttribute: 'defer', }),
   ...productionPlugins(env),
-];
+].filter(plugin => !!plugin); // do not include any undefined into array!
