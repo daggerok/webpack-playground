@@ -11,7 +11,6 @@
     "build": "npm run webpack -- --env prod -p",
     "webpack": "webpack --config ./config/webpack.config.babel.js --bail --progress",
     "webpack-dev-server": "webpack-dev-server --config ./config/webpack.config.babel.js --bail  --progress",
-    "serve": "npm run webpack-dev-server -- --env prod",
     "start": "npm run webpack-dev-server -- --env dev"
   },
   "dependencies": {

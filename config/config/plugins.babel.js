@@ -9,7 +9,7 @@ import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin';
 import { publicPath } from './output.babel.js';
 
 export const extractTextWebpackPlugin = new ExtractTextWebpackPlugin({
-  // filename: '[name]-[hash].bundle.css',
+  // filename: '[name]-[hash].bundle.css?ver=[chunkhash]',
   filename: '[name].bundle.css?ver=[chunkhash]',
   allChunks: true,
   disable: false,
@@ -42,9 +42,8 @@ export default env => [
   new optimize.CommonsChunkPlugin({
     name: 'vendors',
     minChunks: Infinity,
-    // filename: 'vendors.bundle.js',
-    // // // filename: 'vendors-[hash].bundle.js',
-    filename: '[name].bundle.js?ver=[chunkhash]',
+    // filename: 'vendors-[hash].bundle.js?ver=[chunkhash]',
+    filename: '[name].bundle.js?ver=[chunkhash]', // vendors.bundle.js
   }),
   new ProvidePlugin({
     jQuery: 'jquery',
