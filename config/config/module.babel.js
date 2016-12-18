@@ -1,4 +1,4 @@
-import path from 'path';
+import { resolve } from 'path';
 import cssnano from 'cssnano';
 import autoprefixer from 'autoprefixer';
 import { publicPath } from './output.babel';
@@ -50,7 +50,7 @@ const loaders = [
     loader: 'stylus-loader',
     options: {
       includePaths: [
-        path.resolve('./src'),
+        resolve('./src'),
       ],
     },
   },
@@ -68,7 +68,14 @@ export default {
     {
       test: /\.js$/i,
       loader: 'babel-loader',
-      include: path.resolve('./src'),
+      // query: {
+      //   presets: [
+      //     ['es2015', { 'modules': false }],
+      //     'stage-0',
+      //     'react',
+      //   ],
+      // },
+      include: resolve('./src'),
       exclude: /(node_modules|bower_components)/,
     },
     {
@@ -76,7 +83,7 @@ export default {
       loader,
       // loaders,
       // use: loaders,
-      include: path.resolve('./src'),
+      include: resolve('./src'),
       exclude: /(node_modules|bower_components)/,
     },
     {

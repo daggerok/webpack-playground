@@ -1,10 +1,10 @@
-import path from 'path';
+import { resolve } from 'path';
 
 export const publicPath = '/';
 
 export default {
   publicPath,
-  path: path.resolve('./dist'),
+  path: resolve('./dist'),
   // filename: '[name].bundle.js',
   // chunkFilename: '[id].chunk.js',
   filename: '[name].bundle.js?ver=[chunkhash]',

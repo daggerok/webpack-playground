@@ -1,9 +1,9 @@
-import path from 'path';
+import { resolve } from 'path';
 
 export default {
   modules: [
     'node_modules',
-    path.resolve('./src'),
+    resolve('./src'),
   ],
   extensions: [
     '.js',
