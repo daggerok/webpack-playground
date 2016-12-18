@@ -1,3 +1,5 @@
+import SomeModule from './some-module';
+
 describe('some-module', () => {
   it('just should work', () => {
     expect('hi').to.equals('hi');

@@ -71,7 +71,7 @@
     "env": {
       "test": {
         "plugins": [
-          "__coverage__"
+          ["__coverage__", { "ignore": "*.+(test|spec).js" }]
         ]
       }
     }
