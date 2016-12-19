@@ -8,6 +8,7 @@ const wpConfig = wpConfigBuilder(env);
 
 const specGlob = 'src/**/*.spec.js';
 const testGlob = 'src/**/*.test.js';
+const srcGlob = 'src/*/*!(test|spec).js';
 
 process.env.BABEL_ENV = 'test';
 // using module.exports is required by karma:
@@ -30,6 +31,7 @@ module.exports = (config) => {
     files: [
       testGlob,
       specGlob,
+      srcGlob,
     ],
 
 
@@ -43,6 +45,7 @@ module.exports = (config) => {
     preprocessors: {
       [testGlob]: ['webpack'],
       [specGlob]: ['webpack'],
+      [srcGlob]: ['webpack'],
     },
 
 

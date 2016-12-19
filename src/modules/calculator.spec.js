@@ -1,4 +1,3 @@
-import '../vendors';
 import calculator from './calculator';
 
 describe('calculator', () => {
