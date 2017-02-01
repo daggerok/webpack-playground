@@ -63,9 +63,8 @@ const productionPlugins = env => env !== 'prod' ? [] : [
   }),
   // minification:
   new optimize.UglifyJsPlugin({
-    compress:{
-      warnings: false,
-    },
+    mangle: { keep_fnames: true, },
+    compress: { warnings: false, },
   }),
 ];
 
