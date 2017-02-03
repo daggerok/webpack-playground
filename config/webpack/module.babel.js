@@ -1,5 +1,3 @@
-import cssnano from 'cssnano';
-import autoprefixer from 'autoprefixer';
 import { publicPath } from './output.babel';
 import { extractTextWebpackPlugin } from './plugins.babel';
 import { pathTo } from './resolve.babel';
@@ -16,19 +14,20 @@ export default {
     {
       test: /\.js$/i,
       loader: 'babel-loader',
-      query: {
+      options: {
         presets: [
-          'es2015',
+          [ 'es2015', { modules: 'commonjs' } ], // can be false or amd, umd, systemjs, commonjs
           'stage-0',
           'react',
         ],
         plugins: [
           'transform-class-properties',
+          'syntax-dynamic-import',
           'react-html-attrs',
         ],
       },
       include: pathTo('./src'),
-      exclude,
+      // exclude,
     },
     {
       test: /\.(styl|css)$/i,
@@ -37,7 +36,7 @@ export default {
         pathTo('./src'),
         pathTo('./node_modules/normalize.css/'),
       ],
-      exclude,
+      // exclude,
     },
     {
       test: /\.css$/i,

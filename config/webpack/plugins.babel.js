@@ -6,7 +6,6 @@ import {
   NoEmitOnErrorsPlugin, } from 'webpack';
 import precss from 'precss';
 import rucksack from 'rucksack-css';
-import autoprefixer from 'autoprefixer';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextWebpackPlugin from 'extract-text-webpack-plugin';
 import ScriptExtHtmlWebpackPlugin from 'script-ext-html-webpack-plugin';
@@ -65,6 +64,7 @@ const productionPlugins = env => env !== 'prod' ? [] : [
   new optimize.UglifyJsPlugin({
     mangle: { keep_fnames: true, },
     compress: { warnings: false, },
+    sourceMap: env !== 'prod',
   }),
 ];
 
@@ -99,6 +99,7 @@ export default env => [
         ],
         plugins: [
           'transform-class-properties',
+          'syntax-dynamic-import',
           'react-html-attrs',
         ],
       },

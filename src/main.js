@@ -17,7 +17,7 @@ render(
     target='_blank'
     onClick={e => {
       e.preventDefault();
-      System.import('./modules/some-module').then(SomeModule => {
+      import('./modules/some-module').then(SomeModule => {
         console.log(`received module: ${JSON.stringify(SomeModule.db)}`);
         SomeModule.default('ES6 modules success!'); // because of export default ...
         console.log(`module ${SomeModule.name} is updated`);
