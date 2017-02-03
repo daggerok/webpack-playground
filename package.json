@@ -2,7 +2,7 @@
   "version": "0.0.1",
   "name": "webpack-playground",
   "author": "Maksim Kostromin <daggerok@gmail.com>",
-  "description": "using webpack 2 (RC1)",
+  "description": "using webpack 2",
   "main": "src/main.js",
   "license": "ISC",
   "scripts": {
@@ -61,7 +61,6 @@
     "stylus": "0.54.5",
     "stylus-loader": "2.4.0",
     "webpack": "2.2.1",
-    "webpack-dev-middleware": "1.10.0",
     "webpack-dev-server": "2.2.1"
   },
   "babel": {
@@ -72,6 +71,7 @@
     ],
     "plugins": [
       "react-html-attrs",
+      "syntax-dynamic-import",
       "transform-class-properties"
     ],
     "env": {

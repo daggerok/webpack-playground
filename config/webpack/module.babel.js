@@ -1,6 +1,6 @@
-import { resolve } from 'path';
 import { publicPath } from './output.babel';
 import { extractTextWebpackPlugin } from './plugins.babel';
+import { pathTo } from './resolve.babel';
 
 const exclude = /(node_modules|bower_components)/;
 const loader = extractTextWebpackPlugin.extract({
@@ -26,15 +26,15 @@ export default {
           'react-html-attrs',
         ],
       },
-      include: resolve('./src'),
+      include: pathTo('./src'),
       // exclude,
     },
     {
       test: /\.(styl|css)$/i,
       loader,
       include: [
-        resolve('./src'),
-        resolve('./node_modules/normalize.css/'),
+        pathTo('./src'),
+        pathTo('./node_modules/normalize.css/'),
       ],
       // exclude,
     },
