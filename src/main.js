@@ -7,12 +7,10 @@ const body = document.querySelector('#app');
 const incrementData = () => data = data.map(v => v + 1);
 const handler = event => {
   const current = point(incrementData());
-  console.log('c', JSON.stringify(current));
   const latest = movePointTo(current, current[1], current[0] + current[1]);
-  console.log('l', JSON.stringify(latest));
   const template = `
     <h2>data</h2>
-    <p>${data.join('\t|\t')}</p>
+    <p>${data.join(' | ')}</p>
     <h3>Point</h3>
     <ul>
       <li>x: ${latest[0]}</li>

@@ -1,6 +1,6 @@
 {
   "name": "webpack2-quickstart",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./config/webpack.config.js",
   "scripts": {
     "precompile": "rimraf -rf dist",
