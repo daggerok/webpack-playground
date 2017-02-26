@@ -37,7 +37,18 @@ module.exports = env => ({
   },
   plugins: [
     new HtmlWebpackPlugin({
+      // chunks: [
+      //   'vendors',
+      //   'app',
+      // ],
+      // // filename: 'index.html',
       template: './src/index.html',
+      minify: env === 'production' ? {
+        collapseWhitespace: true,
+        removeComments: true,
+        minifyCSS: true,
+        minifyJS: true,
+      } : false,
     }),
     new NamedModulesPlugin(),
   ],
