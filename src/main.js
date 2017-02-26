@@ -24,8 +24,9 @@ const handler = event => {
     canvasContext.rect(prev[0], prev[1], curr[0], curr[1]);
     canvasContext.stroke();
 
-    System.import('./recoursion')
-      .then(module => console.log(`recoursion module is loaded.`));
+    // test recursion module
+    System.import('./recursion')
+      .then(module => console.log(`recursion module is loaded.`));
   });
 };
 
