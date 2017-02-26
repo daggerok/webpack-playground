@@ -37,7 +37,7 @@ module.exports = env => ({
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'App',
+      template: './src/index.html',
     }),
     new NamedModulesPlugin(),
   ],
