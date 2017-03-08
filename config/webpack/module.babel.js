@@ -2,21 +2,47 @@ import { publicPath } from './output.babel';
 import { extractTextWebpackPlugin } from './plugins.babel';
 import { pathTo } from './resolve.babel';
 
-const exclude = /(node_modules|bower_components)/;
-const loader = extractTextWebpackPlugin.extract({
+const use = [
+  {
+    loader: 'css-loader',
+    options: {
+      importloader: 1,
+      minimize: true,
+    },
+  },
+  {
+    loader: 'postcss-loader',
+    options: {
+      sourceMap: 'inline',
+    },
+  },
+];
+
+const cssLoader = extractTextWebpackPlugin.extract({
   publicPath,
   fallbackLoader: 'style-loader',
-  loader: 'css-loader?importloader=1!postcss-loader?sourceMap=inline!stylus-loader',
+  // loader: 'css-loader?importloader=1!postcss-loader?sourceMap=inline!stylus-loader',
+  use,
+});
+
+const stylusLoader = extractTextWebpackPlugin.extract({
+  publicPath,
+  fallbackLoader: 'style-loader',
+  use: [
+    ...use,
+    'stylus-loader',
+  ],
 });
 
 export default {
   rules: [
     {
-      test: /\.js$/i,
+      test: /\.jsx?$/i,
       loader: 'babel-loader',
       options: {
         presets: [
-          [ 'es2015', { modules: 'commonjs' } ], // can be false or amd, umd, systemjs, commonjs
+          // [ 'es2015', { modules: 'commonjs' } ], // can be false or amd, umd, systemjs, commonjs
+          [ 'es2015', { modules: false } ],
           'stage-0',
           'react',
         ],
@@ -27,21 +53,15 @@ export default {
         ],
       },
       include: pathTo('./src'),
-      // exclude,
-    },
-    {
-      test: /\.(styl|css)$/i,
-      loader,
-      include: [
-        pathTo('./src'),
-        pathTo('./node_modules/normalize.css/'),
-      ],
-      // exclude,
     },
     {
       test: /\.css$/i,
-      loader,
-      include: exclude,
+      loader: cssLoader,
+    },
+    {
+      test: /\.styl$/i,
+      loader: stylusLoader,
+      include: pathTo('./src'),
     },
   ],
 };

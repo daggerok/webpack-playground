@@ -20,27 +20,18 @@ export const extractTextWebpackPlugin = new ExtractTextWebpackPlugin({
   publicPath,
 });
 
-const AUTOPREFIXER_BROWSERS = [
-  'last 4 versions',
-  'Android 2.3',
-  'Android >= 4',
-  'Chrome >= 35',
-  'Firefox >= 28',
-  'Explorer >= 9',
-  'ie >= 9',
-  'iOS >= 7',
-  'Opera >= 12',
-  'Safari >= 7.1',
-];
-
 export default env => [
   new NoEmitOnErrorsPlugin(),
   extractTextWebpackPlugin,
   env !== 'test' ? new optimize.CommonsChunkPlugin({ // skip for test
+    name: 'manifest',
+  }) : undefined,
+  env !== 'test' ? new optimize.CommonsChunkPlugin({ // skip for test
     name: 'vendors',
-    minChunks: Infinity,
-    // filename: 'vendors-[hash].bundle.js?ver=[chunkhash]',
-    filename: '[name].bundle.js?ver=[chunkhash]', // vendors.bundle.js
+    chunks: [
+      'app',
+      'vendors',
+    ],
   }) : undefined,
   new ProvidePlugin({
     jQuery: 'jquery',
@@ -50,6 +41,7 @@ export default env => [
   new HtmlWebpackPlugin({
     // // spa fallback (prod, ie github pages only): ¯\_(ツ)_/¯,
     // filename: 'index.html',
+    chunks: 'all',
     favicon: './src/assets/favicon.ico',
     template: './src/assets/index.html',
     minify: env !== 'prod' ? false : {
@@ -95,7 +87,9 @@ export default env => [
         rucksackCss({
           fallbacks: true,
           autoprefixer: {
-            browsers: AUTOPREFIXER_BROWSERS,
+            browsers: [
+              'last 4 versions',
+            ],
           },
         }),
       ],
