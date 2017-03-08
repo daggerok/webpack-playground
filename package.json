@@ -19,6 +19,11 @@
     "webpack-dev-server": "webpack-dev-server --config ./config/webpack.config.babel.js --bail  --progress",
     "start": "npm run webpack-dev-server -- --env dev"
   },
+  "pre-push": [
+    "test",
+    "webpack",
+    "build"
+  ],
   "dependencies": {
     "normalize.css": "5.0.0",
     "react": "15.4.2",
@@ -52,6 +57,7 @@
     "npm-run-all": "4.0.2",
     "postcss": "5.2.16",
     "postcss-loader": "1.3.3",
+    "pre-push": "^0.1.1",
     "precss": "1.4.0",
     "rimraf": "2.6.1",
     "rucksack-css": "0.9.1",
