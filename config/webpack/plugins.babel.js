@@ -41,19 +41,6 @@ const htmlWebpackPlugin = env => {
   return new HtmlWebpackPlugin(HtmlWebpackPluginConfig);
 };
 
-const AUTOPREFIXER_BROWSERS = [
-  'last 4 versions',
-  'Android 2.3',
-  'Android >= 4',
-  'Chrome >= 35',
-  'Firefox >= 28',
-  'Explorer >= 9',
-  'ie >= 9',
-  'iOS >= 7',
-  'Opera >= 12',
-  'Safari >= 7.1',
-];
-
 const productionPlugins = env => env !== 'prod' ? [] : [
   // production death code (using in libs like react...);
   new DefinePlugin({
@@ -71,11 +58,13 @@ const productionPlugins = env => env !== 'prod' ? [] : [
 export default env => [
   new NoEmitOnErrorsPlugin(),
   extractTextWebpackPlugin,
+  new optimize.CommonsChunkPlugin({ name: 'manifest', }),
   new optimize.CommonsChunkPlugin({
     name: 'vendors',
-    minChunks: Infinity,
-    // filename: 'vendors-[hash].bundle.js?ver=[chunkhash]',
-    filename: '[name].bundle.js?ver=[chunkhash]', // vendors.bundle.js
+    chunks: [
+      'app',
+      'vendors',
+    ],
   }),
   new ProvidePlugin({
     jQuery: 'jquery',
@@ -99,6 +88,7 @@ export default env => [
         ],
         plugins: [
           'transform-class-properties',
+          'syntax-dynamic-import',
           'react-html-attrs',
         ],
       },
@@ -107,7 +97,9 @@ export default env => [
         rucksack({
           fallbacks: true,
           autoprefixer: {
-            browsers: AUTOPREFIXER_BROWSERS,
+            browsers: [
+              'last 4 versions',
+            ],
           },
         }),
       ],

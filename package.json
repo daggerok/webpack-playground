@@ -61,7 +61,20 @@
     ],
     "plugins": [
       "react-html-attrs",
+      "syntax-dynamic-import",
       "transform-class-properties"
-    ]
+    ],
+    "env": {
+      "test": {
+        "plugins": [
+          [
+            "__coverage__",
+            {
+              "ignore": "*.+(test|spec).js"
+            }
+          ]
+        ]
+      }
+    }
   }
 }
