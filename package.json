@@ -76,5 +76,14 @@
         ]
       }
     }
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daggerok/webpack-playground.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/daggerok/webpack-playground/issues"
+  },
+  "homepage": "https://github.com/daggerok/webpack-playground#readme"
 }
