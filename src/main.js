@@ -12,19 +12,18 @@ const target = document.querySelector('.app');
 // render(React.createElement(app), target);
 
 render(
-  <a
-    href={webpack2Url}
-    target='_blank'
-    onClick={e => {
-      e.preventDefault();
-      System.import('./modules/some-module').then(SomeModule => {
-        console.log(`received module: ${JSON.stringify(SomeModule.db)}`);
-        SomeModule.default('ES6 modules success!'); // because of export default ...
-        console.log(`module ${SomeModule.name} is updated`);
-      });
-    }}>
-      <div>webpack 2 and lazy loading using ES6 modules</div>
-      <pre>{JSON.stringify(SomeModule.default('ES6 modules success!'))}</pre>
-    </a>,
+  <div style={{ padding: '1%' }}>
+    <a
+      href={webpack2Url}
+      target='_blank'
+      onClick={e => {
+        e.preventDefault();
+        System.import('./modules/some-module').then(({ db, msg }) => {
+          console.log(`module ${msg('ES6 modules success!')} is updated: ${db.counter}`);
+        });
+      }}>
+        <div>webpack 2 and lazy loading using ES6 modules</div>
+    </a>
+  </div>,
   target
 );
